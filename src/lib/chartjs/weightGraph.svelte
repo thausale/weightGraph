@@ -73,15 +73,8 @@
             datasets: finalData,
           }, // Start with empty data or some default
           options: {
-            scales: {
-              x: {
-                // type: "time",
-                // time: {
-                //   unit: "day", // or 'month', 'year', etc., depending on your data
-                //   // other time scale options as needed
-                // },
-              },
-            },
+            responsive: true, // Make sure this is set to true
+            maintainAspectRatio: false, // This can help with making it truly responsive
           }, // Your chart's options
         });
       } else {
@@ -128,3 +121,9 @@
     </tbody>
   </table>
 </div>
+
+<style>
+  canvas {
+    height: 75vh;
+  }
+</style>

@@ -53,7 +53,7 @@
           {/each}
         </select>
 
-        <DateInput bind:value={date} class="my-3" />
+        <DateInput bind:value={date} class="my-3" format="dd-MM-yyyy" />
         <div>
           <button
             type="submit"
