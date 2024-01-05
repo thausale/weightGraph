@@ -1,5 +1,6 @@
 <script>
   import Chart from "chart.js/auto";
+  import "chartjs-adapter-date-fns";
   import { supabase } from "$lib/supabaseClient";
   import { triggerQuery } from "$lib/store";
   import { onMount } from "svelte";
@@ -23,6 +24,8 @@
 
     // ... handle your data ...
     const filteredData = [];
+
+    console.log(data);
 
     if (data) {
       data.forEach((record) => {
@@ -59,10 +62,15 @@
         // parsing: false,
       }));
 
+      // Assuming dataArray is your array of data points
+      finalData.sort((a, b) => new Date(a.x) - new Date(b.x));
+
       //   console.log(reducedData);
       console.log("final", finalData);
 
       const dateLabels = [...new Set(data.map((item) => item.date_recorded))];
+
+      console.log(dateLabels);
 
       const ctx = document.getElementById("myChart");
       if (ctx && ctx instanceof HTMLCanvasElement) {
@@ -75,6 +83,15 @@
           options: {
             responsive: true, // Make sure this is set to true
             maintainAspectRatio: false, // This can help with making it truly responsive
+            pointRadius: 5,
+            scales: {
+              x: {
+                type: "time",
+                time: {
+                  unit: "day",
+                },
+              },
+            },
           }, // Your chart's options
         });
       } else {
